@@ -41,7 +41,10 @@ export default function GamePage() {
       <div style={{ color: 'red', textAlign: 'center', marginTop: 20 }}>
         Error: {error}
         <br />
-        <button onClick={() => navigate('/play')} style={{ marginTop: 20, padding: '10px 20px' }}>
+        <button
+          onClick={() => navigate('/play')}
+          style={{ marginTop: 20, padding: '10px 20px', cursor: 'pointer' }}
+        >
           Back to categories
         </button>
       </div>
@@ -53,7 +56,10 @@ export default function GamePage() {
       <div style={{ textAlign: 'center', marginTop: 20 }}>
         No cards available in this category.
         <br />
-        <button onClick={() => navigate('/play')} style={{ marginTop: 20, padding: '10px 20px' }}>
+        <button
+          onClick={() => navigate('/play')}
+          style={{ marginTop: 20, padding: '10px 20px', cursor: 'pointer' }}
+        >
           Back to categories
         </button>
       </div>
@@ -90,6 +96,23 @@ export default function GamePage() {
 
   return (
     <div style={{ maxWidth: 600, margin: '40px auto', padding: 20 }}>
+      {/* Кнопка возврата к списку категорий сверху */}
+      <button
+        onClick={() => navigate('/play')}
+        style={{
+          marginBottom: 20,
+          padding: '10px 20px',
+          fontSize: '14px',
+          borderRadius: '6px',
+          backgroundColor: '#6c757d',
+          color: 'white',
+          border: 'none',
+          cursor: 'pointer',
+        }}
+      >
+        Back to categories
+      </button>
+
       <h2>Category ID: {categoryId}</h2>
       <div style={{ marginBottom: 20 }}>
         <strong>Question:</strong> {currentCard.question}
@@ -154,21 +177,6 @@ export default function GamePage() {
       <div>
         <strong>Question:</strong> {currentIndex + 1} / {cards.length}
       </div>
-      <button
-        onClick={() => navigate('/play')}
-        style={{
-          marginTop: 30,
-          padding: '10px 20px',
-          fontSize: '14px',
-          borderRadius: '6px',
-          backgroundColor: '#6c757d',
-          color: 'white',
-          border: 'none',
-          cursor: 'pointer',
-        }}
-      >
-        Back to categories
-      </button>
     </div>
   );
 }
