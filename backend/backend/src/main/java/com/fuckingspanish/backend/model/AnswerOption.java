@@ -2,6 +2,9 @@ package com.fuckingspanish.backend.model;
 
 import jakarta.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "answer_options")
 public class AnswerOption {
@@ -16,6 +19,8 @@ public class AnswerOption {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "card_id")
+    @JsonBackReference
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Card card; // Карточка, к которой относится вариант
 
     public AnswerOption() {}

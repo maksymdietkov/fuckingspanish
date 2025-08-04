@@ -1,9 +1,11 @@
 package com.fuckingspanish.backend.model;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "levels")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Level {
 
     @Id
