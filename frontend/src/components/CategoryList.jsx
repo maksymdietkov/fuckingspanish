@@ -38,7 +38,7 @@ export default function CategoryList() {
         Back to Main Menu
       </button>
 
-      {/* Здесь вставляем заголовок */}
+      {/* Заголовок */}
       <HeaderTitle />
 
       {/* Список категорий */}
@@ -56,7 +56,12 @@ export default function CategoryList() {
             backgroundColor: '#007bff',
             color: 'white',
             border: 'none',
+
+            whiteSpace: 'nowrap',    // чтобы текст не переносился
+            overflow: 'hidden',      // скрываем излишки текста
+            textOverflow: 'ellipsis' // добавляем многоточие, если текст не помещается
           }}
+          title={cat.name} // чтобы при наведении показывалось полное название
         >
           {cat.name}
         </button>
