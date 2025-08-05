@@ -22,6 +22,13 @@ public class CategoryController {
         return categoryRepository.findAll();
     }
 
+    // ✅ Новый метод для получения категории по ID
+    @GetMapping("/{id}")
+    public Category getCategoryById(@PathVariable Long id) {
+        return categoryRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Category not found with id " + id));
+    }
+
     @PostMapping
     public Category createCategory(@RequestBody Category category) {
         return categoryRepository.save(category);

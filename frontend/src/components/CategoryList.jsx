@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import HeaderTitle from './HeaderTitle';  // импортируем заголовок
+import HeaderTitle from './HeaderTitle';
 
 export default function CategoryList() {
   const [categories, setCategories] = useState(null);
@@ -17,12 +17,41 @@ export default function CategoryList() {
       .catch(err => setError(err.message));
   }, []);
 
-  if (error) return <div style={{ color: 'red', textAlign: 'center', marginTop: '20px' }}>Error: {error}</div>;
-  if (!categories) return <div style={{ textAlign: 'center', marginTop: '20px' }}>Loading categories...</div>;
+  const buttonBaseStyle = {
+    width: '100%',
+    padding: '15px',
+    margin: '10px 0',
+    fontSize: '18px',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    backgroundColor: '#007bff',
+    color: 'white',
+    border: 'none',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.15)',
+    transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+  };
+
+  const handleMouseEnter = (e) => {
+    e.currentTarget.style.transform = 'scale(1.05)';
+    e.currentTarget.style.boxShadow = '0 6px 12px rgba(0, 0, 0, 0.2)';
+  };
+
+  const handleMouseLeave = (e) => {
+    e.currentTarget.style.transform = 'scale(1)';
+    e.currentTarget.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.15)';
+  };
+
+  if (error)
+    return <div style={{ color: 'red', textAlign: 'center', marginTop: '20px' }}>Error: {error}</div>;
+
+  if (!categories)
+    return <div style={{ textAlign: 'center', marginTop: '20px' }}>Loading categories...</div>;
 
   return (
     <div style={{ padding: '20px', maxWidth: '500px', margin: 'auto' }}>
-      {/* Кнопка назад */}
       <button
         onClick={() => navigate('/')}
         style={{
@@ -38,30 +67,16 @@ export default function CategoryList() {
         Back to Main Menu
       </button>
 
-      {/* Заголовок */}
       <HeaderTitle />
 
-      {/* Список категорий */}
       {categories.map(cat => (
         <button
           key={cat.id}
           onClick={() => navigate(`/play/${cat.id}`)}
-          style={{
-            width: '100%',
-            padding: '15px',
-            margin: '10px 0',
-            fontSize: '18px',
-            borderRadius: '8px',
-            cursor: 'pointer',
-            backgroundColor: '#007bff',
-            color: 'white',
-            border: 'none',
-
-            whiteSpace: 'nowrap',    // чтобы текст не переносился
-            overflow: 'hidden',      // скрываем излишки текста
-            textOverflow: 'ellipsis' // добавляем многоточие, если текст не помещается
-          }}
-          title={cat.name} // чтобы при наведении показывалось полное название
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          style={{ ...buttonBaseStyle }}
+          title={cat.name}
         >
           {cat.name}
         </button>

@@ -12,7 +12,23 @@ export default function GamePage() {
   const [showResult, setShowResult] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [categoryName, setCategoryName] = useState('');
 
+  // Fetch category name
+  useEffect(() => {
+    fetch(`http://localhost:8080/api/categories/${categoryId}`)
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to fetch category name');
+        return res.json();
+      })
+      .then(data => setCategoryName(data.name))
+      .catch(err => {
+        console.error('Failed to load category name:', err);
+        setCategoryName(`ID: ${categoryId}`);
+      });
+  }, [categoryId]);
+
+  // Fetch cards for this category
   useEffect(() => {
     setCards([]);
     setLoading(true);
@@ -114,16 +130,17 @@ export default function GamePage() {
         Back to categories
       </button>
 
-      <h2>Category ID: {categoryId}</h2>
+      <h2 style={{ marginBottom: 20 }}>Category: {categoryName}</h2>
+
       <div style={{ marginBottom: 20 }}>
         <strong>Question:</strong> {currentCard.question}
       </div>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
         {currentCard.answerOptions.map((answer) => {
           const isSelected = selectedAnswerId === answer.id;
           const isCorrect = answer.correct;
-          let backgroundColor = '#eee';
+          let backgroundColor = '#f0f0f0';
 
           if (showResult) {
             if (isSelected) {
@@ -139,22 +156,28 @@ export default function GamePage() {
               onClick={() => handleAnswerClick(answer)}
               disabled={showResult}
               style={{
-                padding: '14px 18px',
-                fontSize: '16px',
+                padding: '16px 20px',
+                fontSize: '18px',
                 borderRadius: '12px',
                 border: '1px solid #ccc',
                 backgroundColor,
                 cursor: showResult ? 'default' : 'pointer',
                 textAlign: 'left',
-                boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-                transition: 'all 0.2s ease-in-out',
+                boxShadow: '0 4px 10px rgba(0,0,0,0.1)',
+                transition: 'transform 0.2s ease, box-shadow 0.2s ease',
                 transform: showResult ? 'none' : 'scale(1)',
               }}
               onMouseEnter={(e) => {
-                if (!showResult) e.currentTarget.style.transform = 'scale(1.02)';
+                if (!showResult) {
+                  e.currentTarget.style.transform = 'scale(1.03)';
+                  e.currentTarget.style.boxShadow = '0 6px 14px rgba(0,0,0,0.15)';
+                }
               }}
               onMouseLeave={(e) => {
-                if (!showResult) e.currentTarget.style.transform = 'scale(1)';
+                if (!showResult) {
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.boxShadow = '0 4px 10px rgba(0,0,0,0.1)';
+                }
               }}
             >
               {answer.text}
@@ -167,10 +190,10 @@ export default function GamePage() {
         <button
           onClick={handleNext}
           style={{
-            marginTop: 20,
-            padding: '10px 20px',
+            marginTop: 24,
+            padding: '12px 24px',
             fontSize: '16px',
-            borderRadius: '6px',
+            borderRadius: '8px',
             backgroundColor: '#007bff',
             color: 'white',
             border: 'none',
