@@ -14,9 +14,12 @@ export default function GamePage() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    setCards([]);          // очистить карточки сразу при смене категории
     setLoading(true);
     setError(null);
-    fetch(`http://localhost:8080/api/cards?categoryId=${categoryId}`)
+    console.log('Fetching cards for categoryId:', categoryId);
+
+    fetch(`http://localhost:8080/api/cards/category/${categoryId}`)
       .then(res => {
         if (!res.ok) throw new Error('Failed to fetch cards');
         return res.json();
@@ -68,6 +71,10 @@ export default function GamePage() {
 
   const currentCard = cards[currentIndex];
 
+  if (!currentCard) {
+    return <div style={{ textAlign: 'center', marginTop: 20 }}>No card to display.</div>;
+  }
+
   function handleAnswerClick(answer) {
     if (selectedAnswerId !== null) return; // запрет на смену ответа после выбора
 
@@ -76,10 +83,6 @@ export default function GamePage() {
 
     if (answer.correct) {
       setScore(prev => prev + 10);
-      // можно тут добавить звук успеха
-    } else {
-      // можно минус очков или звук ошибки
-      // setScore(prev => Math.max(0, prev - 5));
     }
   }
 
@@ -96,7 +99,6 @@ export default function GamePage() {
 
   return (
     <div style={{ maxWidth: 600, margin: '40px auto', padding: 20 }}>
-      {/* Кнопка возврата к списку категорий сверху */}
       <button
         onClick={() => navigate('/play')}
         style={{

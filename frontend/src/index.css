@@ -50,3 +50,8 @@ code {
   margin-top: 5px;
 }
 
+body {
+  background-color: #cfd5dd; /* светлый серо-голубой, нежный фон */
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
