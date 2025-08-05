@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import HeaderTitle from './HeaderTitle';  // импортируем заголовок
 
 export default function CategoryList() {
   const [categories, setCategories] = useState(null);
@@ -37,7 +38,10 @@ export default function CategoryList() {
         Back to Main Menu
       </button>
 
-      <h2 style={{ textAlign: 'center' }}>Choose a Category</h2>
+      {/* Здесь вставляем заголовок */}
+      <HeaderTitle />
+
+      {/* Список категорий */}
       {categories.map(cat => (
         <button
           key={cat.id}

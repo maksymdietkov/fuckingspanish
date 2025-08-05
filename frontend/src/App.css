@@ -35,4 +35,26 @@
   to {
     transform: rotate(360deg);
   }
+  .header {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.game-title {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #e60000;
+  text-shadow: 2px 2px 0 #000;
+  font-family: 'Impact', 'Arial Black', sans-serif;
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #555;
+  font-style: italic;
+  margin-top: 5px;
+  font-family: 'Courier New', Courier, monospace;
+}
 }

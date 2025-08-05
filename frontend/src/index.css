@@ -11,3 +11,42 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.header {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
+
+.game-title {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #e60000;
+  text-shadow: 2px 2px 0 #000;
+  font-family: 'Impact', 'Arial Black', sans-serif;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #333;
+  font-style: italic;
+  font-family: 'Courier New', Courier, monospace;
+  margin: 10px 0 0 0;
+}
+.game-title {
+  font-size: 64px;
+  text-align: center;
+  font-family: 'Impact', sans-serif;
+  color: #e60000;
+  margin-bottom: 0;
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 18px;
+  color: #555;
+  font-style: italic;
+  margin-top: 5px;
+}
+

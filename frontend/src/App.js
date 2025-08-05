@@ -1,9 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
+import './App.css';
 import MainMenu from './components/MainMenu';
 import CategoryList from './components/CategoryList';
 import GamePage from './components/GamePage';
+
+
 
 function Leaderboard() {
   return <h2 style={{ textAlign: 'center', marginTop: '40px' }}>Under construction...</h2>;
