@@ -14,10 +14,9 @@ export default function GamePage() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setCards([]);          // очистить карточки сразу при смене категории
+    setCards([]);
     setLoading(true);
     setError(null);
-    console.log('Fetching cards for categoryId:', categoryId);
 
     fetch(`http://localhost:8080/api/cards/category/${categoryId}`)
       .then(res => {
@@ -76,7 +75,7 @@ export default function GamePage() {
   }
 
   function handleAnswerClick(answer) {
-    if (selectedAnswerId !== null) return; // запрет на смену ответа после выбора
+    if (selectedAnswerId !== null) return;
 
     setSelectedAnswerId(answer.id);
     setShowResult(true);
@@ -140,13 +139,22 @@ export default function GamePage() {
               onClick={() => handleAnswerClick(answer)}
               disabled={showResult}
               style={{
-                padding: '10px',
+                padding: '14px 18px',
                 fontSize: '16px',
-                borderRadius: '6px',
+                borderRadius: '12px',
                 border: '1px solid #ccc',
                 backgroundColor,
                 cursor: showResult ? 'default' : 'pointer',
                 textAlign: 'left',
+                boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
+                transition: 'all 0.2s ease-in-out',
+                transform: showResult ? 'none' : 'scale(1)',
+              }}
+              onMouseEnter={(e) => {
+                if (!showResult) e.currentTarget.style.transform = 'scale(1.02)';
+              }}
+              onMouseLeave={(e) => {
+                if (!showResult) e.currentTarget.style.transform = 'scale(1)';
               }}
             >
               {answer.text}
